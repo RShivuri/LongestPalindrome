@@ -2,7 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        System.out.println(longestPalindrome("cbbd"));
+        System.out.println(longestPalindrome("\"civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth\""));
     }
     public static String longestPalindrome(String s)
     {
@@ -25,70 +25,19 @@ public class Main {
         }
         return  reversedstring;
     }
-    public static String checkPalindrom(String s)
-    {
+    public static String checkPalindrom(String s) {
         String result = "";
-        for(int i = 0; i < s.length(); i++)
-        {
-            String newvalue = stringcut(s.length() - i,s);
-            boolean equal = newvalue.equals(revers(newvalue));
-            //System.out.println(equal);
-            //System.out.println(newvalue + "==" + revers(newvalue));
-            if(equal && newvalue.length() > 1)
-            {
-                result =  newvalue;
-                break;
-            }
-        }
-        if(result.length() == 0)
-        {
-            for(int i = 0; i < s.length(); i++)
-            {
-                String newvalue = stringcut(s.length() - i,s);
-                boolean equal = revers(newvalue).equals(newvalue);
-                //System.out.println(equal);
-                //System.out.println(newvalue + "==" + revers(newvalue));
-                if(equal && newvalue.length() > 1)
-                {
-                    result =  newvalue;
-                    break;
+        // Check all possible substrings from longest to shortest
+        for (int len = s.length(); len > 0; len--) {
+            for (int start = 0; start <= s.length() - len; start++) {
+                String substring = s.substring(start, start + len);
+                if (substring.equals(revers(substring))) {
+                    return substring;
                 }
             }
-            if (result.length() == 0)
-            {
-                String a = "";
-                for(int i = 0; i < s.length(); i++)
-                {
-                    String append = s.charAt(i) + "";
-                    for(int j = 1; j < s.length(); j++)
-                    {
-                        if(s.charAt(i) == s.charAt(j))
-                        {
-                            append += s.charAt(j);
-                            a = append;
-
-                        }
-                        boolean equal = a.equals(revers(a));
-                        if(equal && append.length() > 1)
-                        {
-                            return  a;
-                        }
-                    }
-                }
-                result = a;
-            }
         }
+        return s.substring(0, 1); // If no palindrome found, return first character
+    }
 
-        return result;
-    }
-    public static String stringcut(int n, String s)
-    {
-        String newstring = new String();
-        for(int i = 0; i < n; i++)
-        {
-            newstring += s.charAt(i);
-        }
-        return newstring;
-    }
 
 }
